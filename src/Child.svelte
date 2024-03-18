@@ -68,6 +68,7 @@
 			<span>{item.text}</span>
 		</label>
 		<button on:click={()=>handle_remove_todo(item.id)}>remove</button>
+		<button>dummy button</button>
 	</li>
 	{/each}
 </ul>
