@@ -1,6 +1,6 @@
 <svelte:options immutable= {true}/>
 <script>
-	import { createEventDispatcher, onMount,onDestroy,beforeUpdate,afterUpdate } from 'svelte'
+	import { createEventDispatcher,beforeUpdate,afterUpdate } from 'svelte'
 	export let items
 	let auto_scroll
 	let previous_items = items
@@ -20,32 +20,16 @@
 	let dispatch = createEventDispatcher()
 
 	function handle_add_fruits(){
-		// items = [...items, {
-		// 	text:input_text
-		// }]
-
-		// input_text = ''
-
 
 		let is_prevent = dispatch('add_fruit',{text:input_text},{cancelable:true}) //cancellable:true is used for giving preventdefault usage in parent component
 			// is_prevent is a boolean, which give false or true value when the parent component calls preventDefault or not 
 		
-		// console.log(is_prevent);
-		// if(is_prevent){
-		// 	input_text = ''
-		// }
 	}
 
 	function handle_remove_todo(id){
 		dispatch('remove',id)
 	}
-	onMount(()=>{
-		console.log('I am Born');
-		return ()=>{console.log("I am Leaving")}
-	})
-	onDestroy(()=>{
-		console.log('I am Leaving 2');
-	})
+	
 	beforeUpdate(()=>{
 		console.log(list_ul?.offsetHeight);
 	})
@@ -64,11 +48,9 @@
 	<li class="fancy">
 		<label for="">
 			<input type="checkbox" name="" id=""  bind:checked={item.add_to_cart}>
-			<!-- <slot prop={item}/> -->
 			<span>{item.text}</span>
 		</label>
 		<button on:click={()=>handle_remove_todo(item.id)}>remove</button>
-		<button>dummy button</button>
 	</li>
 	{/each}
 </ul>
